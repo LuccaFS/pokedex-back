@@ -1,0 +1,17 @@
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\bin\Debug\net6.0\pokedex-back.Infrastructure.deps.json
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\bin\Debug\net6.0\pokedex-back.Infrastructure.runtimeconfig.json
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\bin\Debug\net6.0\pokedex-back.Infrastructure.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\bin\Debug\net6.0\pokedex-back.Infrastructure.pdb
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\bin\Debug\net6.0\pokedex-back.Domain.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\bin\Debug\net6.0\pokedex-back.Domain.pdb
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.AssemblyInfo.cs
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.csproj.CopyComplete
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\refint\pokedex-back.Infrastructure.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.pdb
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\pokedex-back.Infrastructure.genruntimeconfig.cache
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Infrastructure\obj\Debug\net6.0\ref\pokedex-back.Infrastructure.dll

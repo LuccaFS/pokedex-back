@@ -1,0 +1,14 @@
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\bin\Debug\net6.0\poc-back.DAL.deps.json
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\bin\Debug\net6.0\poc-back.DAL.runtimeconfig.json
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\bin\Debug\net6.0\poc-back.DAL.dll
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\bin\Debug\net6.0\poc-back.DAL.pdb
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\poc-back.DAL.csproj.AssemblyReference.cache
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\poc-back.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\poc-back.DAL.AssemblyInfoInputs.cache
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\poc-back.DAL.AssemblyInfo.cs
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\poc-back.DAL.csproj.CoreCompileInputs.cache
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\poc-back.DAL.dll
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\refint\poc-back.DAL.dll
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\poc-back.DAL.pdb
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\poc-back.DAL.genruntimeconfig.cache
+C:\Users\flucc\Documents\repo\poc\poc-back\poc-back.DAL\obj\Debug\net6.0\ref\poc-back.DAL.dll

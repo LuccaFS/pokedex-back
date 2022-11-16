@@ -1,0 +1,17 @@
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\bin\Debug\net6.0\pokedex-back.Service.deps.json
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\bin\Debug\net6.0\pokedex-back.Service.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\bin\Debug\net6.0\pokedex-back.Service.pdb
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\bin\Debug\net6.0\pokedex-back.Domain.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\bin\Debug\net6.0\pokedex-back.Infrastructure.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\bin\Debug\net6.0\pokedex-back.Domain.pdb
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\bin\Debug\net6.0\pokedex-back.Infrastructure.pdb
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\pokedex-back.Service.csproj.AssemblyReference.cache
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\pokedex-back.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\pokedex-back.Service.AssemblyInfoInputs.cache
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\pokedex-back.Service.AssemblyInfo.cs
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\pokedex-back.Service.csproj.CoreCompileInputs.cache
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\pokedex-back.Service.csproj.CopyComplete
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\pokedex-back.Service.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\refint\pokedex-back.Service.dll
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\pokedex-back.Service.pdb
+C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Service\obj\Debug\net6.0\ref\pokedex-back.Service.dll
