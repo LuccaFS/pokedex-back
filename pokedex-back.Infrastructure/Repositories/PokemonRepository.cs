@@ -43,5 +43,28 @@ namespace pokedex_back.Infrastructure.Repositories
             return pokemons;
 
         }
+
+        public Pokemon GetByName(string PokeName)
+        {
+            Pokemon pokemon = new Pokemon();
+            var select = new { name = PokeName };
+            var query = "Select A.IdPokemon, A.DsName, B.TypeName as 'Type1', C.TypeName as 'Type2', A.Image, A.Generation, A.isStarter, a.isPseudo, A.isLegendary " +
+                "from [POKEMON] as A inner join [TYPE] as B on A.Type1 = B.IdType LEFT OUTER JOIN [TYPE] as C on A.Type2 = C.IdType WHERE A.DsName = @name";
+            try
+            {
+                pokemon = Database.QueryFirstOrDefault<Pokemon>(query, select);
+                if (pokemon == null)
+                {
+                    throw new ApplicationException("Pokemon not found.");
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+            return pokemon;
+
+        }
     }
 }
