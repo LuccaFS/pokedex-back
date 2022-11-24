@@ -28,9 +28,9 @@ namespace pokedex_back.Service.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public void Create(UserDto user)
+        public void Create(UserRegister user)
         {
-            User userExist = _userRepository.getUser(user.DsEmail);
+            UserDTO userExist = _userRepository.getUser(user.DsEmail);
             if(userExist != null)
             {
                 throw new Exception("E-mail already in use.");
@@ -44,7 +44,7 @@ namespace pokedex_back.Service.Services
         {
             msgErr = string.Empty;
             token = string.Empty;
-            User user = _userRepository.getUser(login.DsEmail);
+            UserDTO user = _userRepository.getUser(login.DsEmail);
             if (user == null)
             {
                 msgErr = "User not found";
@@ -62,31 +62,27 @@ namespace pokedex_back.Service.Services
             
         }
 
-        public string GetName()
+        #region ' Get User Authorized '
+        public User getUser()
         {
-            var result = string.Empty;
-            if(_httpContextAccessor != null)
-            {
-                result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            }
-            return result;
-        }
-
-        public string GetRank()
-        {
-            var result = string.Empty;
+            User user = new User { };
             if (_httpContextAccessor != null)
             {
-                result = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+                user.Id = Int32.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+                user.DsName = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+                user.DsRank = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
             }
-            return result;
+            return user;
+            
         }
+        #endregion
 
-        private string CreateToken(User user)
+        private string CreateToken(UserDTO user)
         {
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.DsName),
+                new Claim(ClaimTypes.NameIdentifier, user.IdTrainer.ToString()),
                 new Claim(ClaimTypes.Role, user.RankName)
             };
 

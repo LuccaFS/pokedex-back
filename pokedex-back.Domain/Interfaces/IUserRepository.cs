@@ -9,8 +9,8 @@ namespace pokedex_back.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        User Create(UserDto newUser, byte[] passwordSalt);
-        User getUser(string email);
+        UserDTO Create(UserRegister newUser, byte[] passwordSalt);
+        UserDTO getUser(string email);
 
     }
 }

@@ -9,9 +9,8 @@ namespace pokedex_back.Domain.Interfaces
 {
     public interface IUserService
     {
-        public void Create(UserDto user);
+        public void Create(UserRegister user);
         public bool Login(LoginModel login, out string msgErr, out string token);
-        public string GetName();
-        public string GetRank();
+        public User getUser();
     }
 }

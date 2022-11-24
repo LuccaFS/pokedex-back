@@ -17,7 +17,7 @@ namespace pokedex_back.Controllers
         }   
 
         [HttpPost("Register")]
-        public IActionResult Register([FromBody] UserDto user)
+        public IActionResult Register([FromBody] UserRegister user)
         {
             try
             {
@@ -65,30 +65,16 @@ namespace pokedex_back.Controllers
             }
         }
 
-        /// <summary>
-        /// Gets user name when authorized
+        ///<summary>
+        ///Get user data when authorized
         /// </summary>
         /// <returns></returns>
-        [HttpGet("GetName"), Authorize]
-        public IActionResult GetName()
-        {   
-            var user = _userService.GetName();
-            return Ok(new ResponseModel()
-            {
-                ResponseCode = "OK",
-                ResponseMessage = user
-            });
-        }
-
-        [HttpGet("GetRank"), Authorize]
-        public IActionResult GetRank()
+        
+        [HttpGet("GetUser"), Authorize]
+        public IActionResult GetUser()
         {
-            var user = _userService.GetRank();
-            return Ok(new ResponseModel()
-            {
-                ResponseCode = "OK",
-                ResponseMessage = user
-            });
+            var user = _userService.getUser();
+            return Ok(user);
         }
     }
 }
