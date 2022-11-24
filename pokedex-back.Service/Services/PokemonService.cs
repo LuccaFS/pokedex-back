@@ -34,5 +34,10 @@ namespace pokedex_back.Service.Services
             return _pokemonRepository.GetByName(PokeName);
         }
 
+        public Pokemon GetById(string PokeName)
+        {
+            return _pokemonRepository.GetById(PokeName);
+        }
+
     }
 }

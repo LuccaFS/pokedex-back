@@ -7,5 +7,6 @@ namespace pokedex_back.Domain.Interfaces
         void SavePokemon(PokemonDTO pokemon);
         public List<Pokemon> GetAll();
         public Pokemon GetByName(string PokeName);
+        public Pokemon GetById(string PokeId);
     }
 }

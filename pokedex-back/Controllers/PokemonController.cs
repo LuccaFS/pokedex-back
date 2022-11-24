@@ -73,5 +73,24 @@ namespace pokedex_back.Controllers
             }
         }
 
+
+        [HttpGet("GetById")]
+        public IActionResult GetById([FromQuery] string PokeId)
+        {
+            try
+            {
+                Pokemon pokemon = _pokedexService.GetById(PokeId);
+                return Ok(pokemon);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ResponseModel()
+                {
+                    ResponseCode = "Error",
+                    ResponseMessage = e.Message
+                });
+            }
+        }
+
     }
 }
