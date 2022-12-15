@@ -5,8 +5,13 @@ namespace pokedex_back.Domain.Interfaces
     public interface IPokemonRepository
     {
         void SavePokemon(PokemonDTO pokemon);
-        public List<Pokemon> GetAll();
-        public Pokemon GetByName(string PokeName);
-        public Pokemon GetById(string PokeId);
+        List<Pokemon> GetAll();
+        Pokemon GetByName(string PokeName);
+        Pokemon GetById(string PokeId);
+
+        void SaveShinyHunt(ShinyHunt Hunt);
+        void UpdateShinyHunt(ShinyHunt Hunt);
+        ShinyHunt GetShinyHunt(int UserId, string Name);
+        List<ShinyHunt> GetUserHunts(int UserId);
     }
 }

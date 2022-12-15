@@ -18,11 +18,11 @@ namespace pokedex_back.Service.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
+        #region ' Pokedex '
         public void SavePokemon(PokemonDTO pokemon)
         {
             _pokemonRepository.SavePokemon(pokemon);
         }
-
 
         public List<Pokemon> GetAll()
         {
@@ -38,6 +38,21 @@ namespace pokedex_back.Service.Services
         {
             return _pokemonRepository.GetById(PokeName);
         }
+        #endregion
+
+
+        #region ' Shiny Hunt '
+        public void SaveShinyHunt(ShinyHunt Hunt)
+        {
+            _pokemonRepository.SaveShinyHunt(Hunt);
+        }
+
+        public List<ShinyHunt> GetUserHunts(int UserId)
+        {
+            return _pokemonRepository.GetUserHunts(UserId);
+        }
+        #endregion
+
 
     }
 }

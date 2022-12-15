@@ -92,5 +92,44 @@ namespace pokedex_back.Controllers
             }
         }
 
+        [HttpPost("Shiny/Save")]
+        public IActionResult SaveShiny([FromBody] ShinyHunt pokemon)
+        {
+            try
+            {
+                _pokedexService.SaveShinyHunt(pokemon);
+                return Ok(new ResponseModel()
+                {
+                    ResponseCode = "OK"
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ResponseModel()
+                {
+                    ResponseCode = "Error",
+                    ResponseMessage = e.Message
+                });
+            }
+        }
+
+        [HttpGet("Shiny/GetTrainerHunts")]
+        public IActionResult GetShinyHunts([FromQuery] int idTrainer)
+        {
+            try
+            {
+                List<ShinyHunt> pokemons = _pokedexService.GetUserHunts(idTrainer);
+                return Ok(pokemons);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ResponseModel()
+                {
+                    ResponseCode = "Error",
+                    ResponseMessage = e.Message
+                });
+            }
+        }
+
     }
 }

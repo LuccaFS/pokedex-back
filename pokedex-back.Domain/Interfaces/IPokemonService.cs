@@ -13,5 +13,7 @@ namespace pokedex_back.Domain.Interfaces
         public List<Pokemon> GetAll();
         public Pokemon GetByName(string PokeName);
         public Pokemon GetById(string PokeId);
+        void SaveShinyHunt(ShinyHunt Hunt);
+        List<ShinyHunt> GetUserHunts(int UserId);
     }
 }

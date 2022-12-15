@@ -33,4 +33,11 @@ namespace pokedex_back.Domain.Models
         public bool IsLegendary { get; set; }
 
     }
+
+    public class ShinyHunt
+    {
+        public int IdTrainer { get; set; }
+        public string PokeName { get; set; }
+        public int Counter { get; set; }
+    }
 }
