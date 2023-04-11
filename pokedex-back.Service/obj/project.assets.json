@@ -3825,24 +3825,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\flucc\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Lucca\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\flucc\\Documents\\repo\\pokedex\\pokedex-back\\pokedex-back.Service\\pokedex-back.Service.csproj",
+      "projectUniqueName": "D:\\Software\\repo\\pokedex-back\\pokedex-back.Service\\pokedex-back.Service.csproj",
       "projectName": "pokedex-back.Service",
-      "projectPath": "C:\\Users\\flucc\\Documents\\repo\\pokedex\\pokedex-back\\pokedex-back.Service\\pokedex-back.Service.csproj",
-      "packagesPath": "C:\\Users\\flucc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\flucc\\Documents\\repo\\pokedex\\pokedex-back\\pokedex-back.Service\\obj\\",
+      "projectPath": "D:\\Software\\repo\\pokedex-back\\pokedex-back.Service\\pokedex-back.Service.csproj",
+      "packagesPath": "C:\\Users\\Lucca\\.nuget\\packages\\",
+      "outputPath": "D:\\Software\\repo\\pokedex-back\\pokedex-back.Service\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\flucc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Lucca\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3856,11 +3851,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\flucc\\Documents\\repo\\pokedex\\pokedex-back\\pokedex-back.Domain\\pokedex-back.Domain.csproj": {
-              "projectPath": "C:\\Users\\flucc\\Documents\\repo\\pokedex\\pokedex-back\\pokedex-back.Domain\\pokedex-back.Domain.csproj"
+            "D:\\Software\\repo\\pokedex-back\\pokedex-back.Domain\\pokedex-back.Domain.csproj": {
+              "projectPath": "D:\\Software\\repo\\pokedex-back\\pokedex-back.Domain\\pokedex-back.Domain.csproj"
             },
-            "C:\\Users\\flucc\\Documents\\repo\\pokedex\\pokedex-back\\pokedex-back.Infrastructure\\pokedex-back.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\flucc\\Documents\\repo\\pokedex\\pokedex-back\\pokedex-back.Infrastructure\\pokedex-back.Infrastructure.csproj"
+            "D:\\Software\\repo\\pokedex-back\\pokedex-back.Infrastructure\\pokedex-back.Infrastructure.csproj": {
+              "projectPath": "D:\\Software\\repo\\pokedex-back\\pokedex-back.Infrastructure\\pokedex-back.Infrastructure.csproj"
             }
           }
         }
@@ -3900,7 +3895,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

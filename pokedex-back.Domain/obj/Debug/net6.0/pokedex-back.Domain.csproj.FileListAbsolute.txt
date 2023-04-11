@@ -10,3 +10,15 @@ C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Domain\obj\Debug
 C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\refint\pokedex-back.Domain.dll
 C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\pokedex-back.Domain.pdb
 C:\Users\flucc\Documents\repo\pokedex\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\ref\pokedex-back.Domain.dll
+D:\Software\repo\pokedex-back\pokedex-back.Domain\bin\Debug\net6.0\pokedex-back.Domain.deps.json
+D:\Software\repo\pokedex-back\pokedex-back.Domain\bin\Debug\net6.0\pokedex-back.Domain.dll
+D:\Software\repo\pokedex-back\pokedex-back.Domain\bin\Debug\net6.0\pokedex-back.Domain.pdb
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\pokedex-back.Domain.csproj.AssemblyReference.cache
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\pokedex-back.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\pokedex-back.Domain.AssemblyInfoInputs.cache
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\pokedex-back.Domain.AssemblyInfo.cs
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\pokedex-back.Domain.csproj.CoreCompileInputs.cache
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\pokedex-back.Domain.dll
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\refint\pokedex-back.Domain.dll
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\pokedex-back.Domain.pdb
+D:\Software\repo\pokedex-back\pokedex-back.Domain\obj\Debug\net6.0\ref\pokedex-back.Domain.dll

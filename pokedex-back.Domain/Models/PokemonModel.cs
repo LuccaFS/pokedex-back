@@ -24,8 +24,8 @@ namespace pokedex_back.Domain.Models
     {
         public int IdPokemon { get; set; }
         public string DsName { get; set; }
-        public string Type1 { get; set; }
-        public string? Type2 { get; set; }
+        public int Type1 { get; set; }
+        public int? Type2 { get; set; }
         public string Image { get; set; }
         public int Generation { get; set; }
         public bool IsStarter { get; set; }

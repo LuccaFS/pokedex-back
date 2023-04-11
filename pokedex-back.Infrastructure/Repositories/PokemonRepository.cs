@@ -31,8 +31,7 @@ namespace pokedex_back.Infrastructure.Repositories
         public List<Pokemon> GetAll()
         {
             List<Pokemon> pokemons = new List<Pokemon>();
-            var query = "Select A.IdPokemon, A.DsName, B.TypeName as 'Type1', C.TypeName as 'Type2', A.Image, A.Generation, A.isStarter, a.isPseudo, A.isLegendary " +
-                "from [POKEMON] as A inner join [TYPE] as B on A.Type1 = B.IdType LEFT OUTER JOIN [TYPE] as C on A.Type2 = C.IdType";
+            var query = "Select * from [POKEMON]";
             try
             {
                 pokemons = Database.Query<Pokemon>(query).ToList();
@@ -50,8 +49,7 @@ namespace pokedex_back.Infrastructure.Repositories
         {
             Pokemon pokemon = new Pokemon();
             var select = new { name = PokeName };
-            var query = "Select A.IdPokemon, A.DsName, B.TypeName as 'Type1', C.TypeName as 'Type2', A.Image, A.Generation, A.isStarter, a.isPseudo, A.isLegendary " +
-                "from [POKEMON] as A inner join [TYPE] as B on A.Type1 = B.IdType LEFT OUTER JOIN [TYPE] as C on A.Type2 = C.IdType WHERE A.DsName = @name";
+            var query = "Select * from [POKEMON] WHERE DsName = @name";
             try
             {
                 pokemon = Database.QueryFirstOrDefault<Pokemon>(query, select);
@@ -73,8 +71,7 @@ namespace pokedex_back.Infrastructure.Repositories
         {
             Pokemon pokemon = new Pokemon();
             var select = new { id = PokeId };
-            var query = "Select A.IdPokemon, A.DsName, B.TypeName as 'Type1', C.TypeName as 'Type2', A.Image, A.Generation, A.isStarter, a.isPseudo, A.isLegendary " +
-                "from [POKEMON] as A inner join [TYPE] as B on A.Type1 = B.IdType LEFT OUTER JOIN [TYPE] as C on A.Type2 = C.IdType WHERE A.IdPokemon = @id";
+            var query = "Select * from [POKEMON] WHERE IdPokemon = @id";
             try
             {
                 pokemon = Database.QueryFirstOrDefault<Pokemon>(query, select);

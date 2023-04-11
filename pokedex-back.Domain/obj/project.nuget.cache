@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LwKDajfrLvaMughradTwgVM3p+BOTvnH9k/QLPqs1b72rhDgEfoy5c95XQIcBte4envSr4sTMsb62bIxrQzggA==",
+  "dgSpecHash": "NZF1z/Wi9an+HMHzyTyrbOw+jN1NSwnSf9Z2T699ZPgS2r4Y+XJbM1ITJT4EwCE4NhbL1QAJxyW7UAEZCrxOqw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\flucc\\Documents\\repo\\pokedex\\pokedex-back\\pokedex-back.Domain\\pokedex-back.Domain.csproj",
+  "projectFilePath": "D:\\Software\\repo\\pokedex-back\\pokedex-back.Domain\\pokedex-back.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
