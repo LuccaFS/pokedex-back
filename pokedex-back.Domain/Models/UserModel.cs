@@ -9,7 +9,7 @@ namespace pokedex_back.Domain.Models
     public class UserDTO
     {
         public int IdTrainer { get; set; }
-        public string DsName { get; set; }
+        public string DsUserName { get; set; }
         public string DsEmail { get; set; }
         public string DsPassword { get; set; }
         public string DsSalt { get; set; }

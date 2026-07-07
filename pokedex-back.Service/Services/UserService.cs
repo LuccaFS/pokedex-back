@@ -50,13 +50,13 @@ namespace pokedex_back.Service.Services
                 msgErr = "User not found";
                 return false;
             }
-            if(!VerifyPasswordHash(login.DsPassword, Convert.FromBase64String(user.DsPassword), Convert.FromBase64String(user.DsSalt)))
+            if (!VerifyPasswordHash(login.DsPassword, Convert.FromBase64String(user.DsPassword), Convert.FromBase64String(user.DsSalt)))
             {
                 msgErr = "Wrong Password";
                 return false;
             }
 
-            token = CreateToken(user);
+            token = CreateToken();
 
             return true;
             
@@ -77,13 +77,13 @@ namespace pokedex_back.Service.Services
         }
         #endregion
 
-        private string CreateToken(UserDTO user)
+        private string CreateToken()
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.DsName),
-                new Claim(ClaimTypes.NameIdentifier, user.IdTrainer.ToString()),
-                new Claim(ClaimTypes.Role, user.RankName)
+                new Claim(ClaimTypes.Name, "Trainer"),
+                new Claim(ClaimTypes.NameIdentifier, "1"),
+                new Claim(ClaimTypes.Role, "Master")
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
