@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using pokedex_back.Domain.Interfaces;
 using pokedex_back.Domain.Models.Dtos;
@@ -17,8 +18,8 @@ namespace pokedex_back.Controllers
             _pokemonService = pokemonService;
         }
 
-        [HttpPost("Save")]
-        public IActionResult Save([FromBody] PokemonDTO_old pokemon)
+        [HttpPost("Save"), Authorize]
+        public IActionResult Save([FromBody] PokemonInputDto pokemon)
         {
             try
             {
@@ -61,7 +62,7 @@ namespace pokedex_back.Controllers
         {
             try
             {
-                Pokemon pokemon = _pokemonService.GetByName(PokeName);
+                PokemonDto pokemon = _pokemonService.GetByName(PokeName);
                 return Ok(pokemon);
             }
             catch (Exception e)
@@ -80,7 +81,7 @@ namespace pokedex_back.Controllers
         {
             try
             {
-                Pokemon pokemon = _pokemonService.GetById(PokeId);
+                PokemonDto pokemon = _pokemonService.GetById(PokeId);
                 return Ok(pokemon);
             }
             catch (Exception e)
@@ -94,8 +95,8 @@ namespace pokedex_back.Controllers
         }
 
         #region 'Shiny Hunt'
-        [HttpPost("Shiny/Save")]
-        public IActionResult SaveShiny([FromBody] ShinyHunt pokemon)
+        [HttpPost("Shiny/Save"), Authorize]
+        public IActionResult SaveShiny([FromBody] ShinyHuntInputDto pokemon)
         {
             try
             {
@@ -120,7 +121,7 @@ namespace pokedex_back.Controllers
         {
             try
             {
-                List<ShinyHunt> pokemons = _pokemonService.GetUserHunts(idTrainer);
+                List<ShinyHuntDto> pokemons = _pokemonService.GetUserHunts(idTrainer);
                 return Ok(pokemons);
             }
             catch (Exception e)

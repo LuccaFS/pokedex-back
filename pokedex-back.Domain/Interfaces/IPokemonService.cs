@@ -10,12 +10,12 @@ namespace pokedex_back.Domain.Interfaces
 {
     public interface IPokemonService
     {
-        public void SavePokemon(PokemonDTO_old pokemon);
+        public void SavePokemon(PokemonInputDto pokemon);
         public List<PokemonDto> GetAll();
-        public Pokemon GetByName(string PokeName);
-        public Pokemon GetById(string PokeId);
-        void SaveShinyHunt(ShinyHunt Hunt);
-        List<ShinyHunt> GetUserHunts(int UserId);
+        public PokemonDto GetByName(string PokeName);
+        public PokemonDto GetById(string PokeId);
+        void SaveShinyHunt(ShinyHuntInputDto Hunt);
+        List<ShinyHuntDto> GetUserHunts(int UserId);
 
         List<PokemonDto> GetAndSaveFromAPI(List<PokemonInputDto> pokemons);
     }

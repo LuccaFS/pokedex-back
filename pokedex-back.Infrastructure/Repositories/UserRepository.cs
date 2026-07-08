@@ -46,7 +46,7 @@ namespace pokedex_back.Infrastructure.Repositories
         #region 'Get User'
         public UserDTO getUser(string email)
         {
-            string sql = "SELECT A.*, C.RankName FROM [Trainers] as A inner join [RANKMAPPER] as B on A.TrainerId = B.Trainer inner join [Rank] as C on B.Rank = C.Id WHERE TrainerEmail=@email";
+            string sql = "SELECT A.*, C.RankName FROM [Trainers] as A inner join [RANKMAPPER] as B on A.TrainerId = B.TrainerId inner join [Ranks] as C on B.RankId = C.RankId WHERE TrainerEmail=@email";
             DynamicParameters param = new();
             param.Add(name: "email", value: email, direction: ParameterDirection.Input);
 

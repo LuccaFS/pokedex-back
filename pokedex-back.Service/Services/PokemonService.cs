@@ -20,7 +20,7 @@ namespace pokedex_back.Service.Services
         }
 
         #region ' Pokedex '
-        public void SavePokemon(PokemonDTO_old pokemon)
+        public void SavePokemon(PokemonInputDto pokemon)
         {
             _pokemonRepository.SavePokemon(pokemon);
         }
@@ -30,12 +30,12 @@ namespace pokedex_back.Service.Services
             return _pokemonRepository.GetAll();
         }
 
-        public Pokemon GetByName(string PokeName)
+        public PokemonDto GetByName(string PokeName)
         {
             return _pokemonRepository.GetByName(PokeName);
         }
 
-        public Pokemon GetById(string PokeName)
+        public PokemonDto GetById(string PokeName)
         {
             return _pokemonRepository.GetById(PokeName);
         }
@@ -43,12 +43,12 @@ namespace pokedex_back.Service.Services
 
 
         #region ' Shiny Hunt '
-        public void SaveShinyHunt(ShinyHunt Hunt)
+        public void SaveShinyHunt(ShinyHuntInputDto Hunt)
         {
             _pokemonRepository.SaveShinyHunt(Hunt);
         }
 
-        public List<ShinyHunt> GetUserHunts(int UserId)
+        public List<ShinyHuntDto> GetUserHunts(int UserId)
         {
             return _pokemonRepository.GetUserHunts(UserId);
         }

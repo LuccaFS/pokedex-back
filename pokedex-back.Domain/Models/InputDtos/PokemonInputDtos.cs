@@ -18,3 +18,23 @@ public class PokemonInputDto
     public int? FormGroupId { get; set; } = null;
     public int? BaseFormNumber { get; set; } = null;
 }
+
+public class ShinyHuntInputDto
+{
+    public int TrainerId { get; set; }
+    public int PokemonNumber { get; set; }
+    public string PokemonName { get; set; } = null!;
+    public int EncounterCount { get; set; }
+    public int? PhaseCount { get; set; } = null;
+    public int? GameId { get; set; } = null;
+    public bool HasShinyCharm { get; set; }
+    public int MethodId { get; set; }
+}
+
+public class GetShinyHuntInputDto
+{
+    public int TrainerId { get; set; }
+    public int? PokemonNumber { get; set; } = null;
+    public int? GameId { get; set; } = null;
+    public int? MethodId { get; set; } = null;
+}
