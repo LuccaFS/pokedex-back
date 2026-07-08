@@ -41,6 +41,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPokemonService, PokemonService>();
 builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
+builder.Services.AddScoped<ICommonService, CommonService>();
+builder.Services.AddScoped<ICommonRepository, CommonRepository>();
 
 builder.Services.AddCors(options =>
 {

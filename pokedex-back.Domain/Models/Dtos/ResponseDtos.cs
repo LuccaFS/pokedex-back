@@ -11,4 +11,10 @@ namespace pokedex_back.Domain.Models.Dtos
         public string ResponseCode { get; set; }
         public string ResponseMessage { get; set; }
     }
+
+    public class DropdownDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }
