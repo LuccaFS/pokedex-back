@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using pokedex_back.Domain.Interfaces;
-using pokedex_back.Domain.Models;
+using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
 
 namespace pokedex_back.Service.Services
 {
@@ -19,12 +20,12 @@ namespace pokedex_back.Service.Services
         }
 
         #region ' Pokedex '
-        public void SavePokemon(PokemonDTO pokemon)
+        public void SavePokemon(PokemonDTO_old pokemon)
         {
             _pokemonRepository.SavePokemon(pokemon);
         }
 
-        public List<Pokemon> GetAll()
+        public List<PokemonDto> GetAll()
         {
             return _pokemonRepository.GetAll();
         }
@@ -53,6 +54,12 @@ namespace pokedex_back.Service.Services
         }
         #endregion
 
+        #region 'PokeAPI'
+        public List<PokemonDto> GetAndSaveFromAPI(List<PokemonInputDto> pokemons)
+        {
+            return _pokemonRepository.GetAndSaveFromAPI(pokemons);
+        }
+        #endregion
 
     }
 }

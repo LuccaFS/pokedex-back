@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using pokedex_back.Domain.Models;
 using pokedex_back.Domain.Interfaces;
+using pokedex_back.Domain.Models.InputDtos;
+using pokedex_back.Domain.Models.Dtos;
 
 namespace pokedex_back.Controllers
 {
@@ -22,14 +23,14 @@ namespace pokedex_back.Controllers
             try
             {
                 _userService.Create(user);
-                return Ok(new ResponseModel()
+                return Ok(new ResponseDto()
                 {
                     ResponseCode = "OK"
                 });
             }
             catch(Exception e)
             {
-                return BadRequest(new ResponseModel()
+                return BadRequest(new ResponseDto()
                 {
                     ResponseCode = "Error",
                     ResponseMessage = e.Message
@@ -38,21 +39,21 @@ namespace pokedex_back.Controllers
         }
 
         [HttpPost("Login")]
-        public IActionResult Login([FromBody] LoginModel login)
+        public IActionResult Login([FromBody] LoginInputDto login)
         {
             try
             {
                 var result = _userService.Login(login, out string msgErr, out string token);
                 if (result)
                 {
-                    var response = new ResponseModel();
+                    var response = new ResponseDto();
                     response.ResponseCode = "OK";
                     response.ResponseMessage = token;
                     return Ok(response);
                 }
                 else
                 {
-                    return Unauthorized(new ResponseModel()
+                    return Unauthorized(new ResponseDto()
                     {
                         ResponseCode = "ERR",
                         ResponseMessage = msgErr

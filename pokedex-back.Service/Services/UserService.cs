@@ -2,7 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using pokedex_back.Domain.Interfaces;
-using pokedex_back.Domain.Models;
+using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -40,7 +41,7 @@ namespace pokedex_back.Service.Services
             var newUser = _userRepository.Create(user, passwordSalt);
         }
 
-        public bool Login(LoginModel login, out string msgErr, out string token)
+        public bool Login(LoginInputDto login, out string msgErr, out string token)
         {
             msgErr = string.Empty;
             token = string.Empty;
@@ -50,7 +51,7 @@ namespace pokedex_back.Service.Services
                 msgErr = "User not found";
                 return false;
             }
-            if (!VerifyPasswordHash(login.DsPassword, Convert.FromBase64String(user.DsPassword), Convert.FromBase64String(user.DsSalt)))
+            if (!VerifyPasswordHash(login.DsPassword, Convert.FromBase64String(user.TrainerPassword), Convert.FromBase64String(user.TrainerSalt)))
             {
                 msgErr = "Wrong Password";
                 return false;
@@ -87,7 +88,7 @@ namespace pokedex_back.Service.Services
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                _config.GetSection("AppSettings:Token").Value));
+                _config.GetSection("Auth:Token").Value));
 
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 

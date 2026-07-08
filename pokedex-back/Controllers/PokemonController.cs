@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using pokedex_back.Domain.Models;
 using pokedex_back.Domain.Interfaces;
+using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
 
 namespace pokedex_back.Controllers
 {
@@ -9,27 +10,27 @@ namespace pokedex_back.Controllers
     [ApiController]
     public class PokemonController : ControllerBase
     {
-        private readonly IPokemonService _pokedexService;
+        private readonly IPokemonService _pokemonService;
 
-        public PokemonController(IPokemonService pokedexService)
+        public PokemonController(IPokemonService pokemonService)
         {
-            _pokedexService = pokedexService;
+            _pokemonService = pokemonService;
         }
 
         [HttpPost("Save")]
-        public IActionResult Save([FromBody] PokemonDTO pokemon)
+        public IActionResult Save([FromBody] PokemonDTO_old pokemon)
         {
             try
             {
-                _pokedexService.SavePokemon(pokemon);
-                return Ok(new ResponseModel()
+                _pokemonService.SavePokemon(pokemon);
+                return Ok(new ResponseDto()
                 {
                     ResponseCode = "OK"
                 });
             }
             catch (Exception e)
             {
-                return BadRequest(new ResponseModel()
+                return BadRequest(new ResponseDto()
                 {
                     ResponseCode = "Error",
                     ResponseMessage = e.Message
@@ -42,12 +43,12 @@ namespace pokedex_back.Controllers
         {
             try
             {
-                List<Pokemon> pokemons = _pokedexService.GetAll();
+                List<PokemonDto> pokemons = _pokemonService.GetAll();
                 return Ok(pokemons);
             }
             catch (Exception e)
             {
-                return BadRequest(new ResponseModel()
+                return BadRequest(new ResponseDto()
                 {
                     ResponseCode = "Error",
                     ResponseMessage = e.Message
@@ -60,12 +61,12 @@ namespace pokedex_back.Controllers
         {
             try
             {
-                Pokemon pokemon = _pokedexService.GetByName(PokeName);
+                Pokemon pokemon = _pokemonService.GetByName(PokeName);
                 return Ok(pokemon);
             }
             catch (Exception e)
             {
-                return BadRequest(new ResponseModel()
+                return BadRequest(new ResponseDto()
                 {
                     ResponseCode = "Error",
                     ResponseMessage = e.Message
@@ -79,12 +80,12 @@ namespace pokedex_back.Controllers
         {
             try
             {
-                Pokemon pokemon = _pokedexService.GetById(PokeId);
+                Pokemon pokemon = _pokemonService.GetById(PokeId);
                 return Ok(pokemon);
             }
             catch (Exception e)
             {
-                return BadRequest(new ResponseModel()
+                return BadRequest(new ResponseDto()
                 {
                     ResponseCode = "Error",
                     ResponseMessage = e.Message
@@ -92,20 +93,21 @@ namespace pokedex_back.Controllers
             }
         }
 
+        #region 'Shiny Hunt'
         [HttpPost("Shiny/Save")]
         public IActionResult SaveShiny([FromBody] ShinyHunt pokemon)
         {
             try
             {
-                _pokedexService.SaveShinyHunt(pokemon);
-                return Ok(new ResponseModel()
+                _pokemonService.SaveShinyHunt(pokemon);
+                return Ok(new ResponseDto()
                 {
                     ResponseCode = "OK"
                 });
             }
             catch (Exception e)
             {
-                return BadRequest(new ResponseModel()
+                return BadRequest(new ResponseDto()
                 {
                     ResponseCode = "Error",
                     ResponseMessage = e.Message
@@ -118,18 +120,24 @@ namespace pokedex_back.Controllers
         {
             try
             {
-                List<ShinyHunt> pokemons = _pokedexService.GetUserHunts(idTrainer);
+                List<ShinyHunt> pokemons = _pokemonService.GetUserHunts(idTrainer);
                 return Ok(pokemons);
             }
             catch (Exception e)
             {
-                return BadRequest(new ResponseModel()
+                return BadRequest(new ResponseDto()
                 {
                     ResponseCode = "Error",
                     ResponseMessage = e.Message
                 });
             }
         }
+        #endregion
 
+        [HttpPost("SaveFromApi")]
+        public async Task<ActionResult<List<PokemonDto>>> GetAndSaveFromAPI(List<PokemonInputDto> pokemons)
+        {
+            return Ok(_pokemonService.GetAndSaveFromAPI(pokemons));
+        }
     }
 }

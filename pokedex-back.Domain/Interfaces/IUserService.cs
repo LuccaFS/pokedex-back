@@ -1,4 +1,5 @@
-﻿using pokedex_back.Domain.Models;
+﻿using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace pokedex_back.Domain.Interfaces
     public interface IUserService
     {
         public void Create(UserRegister user);
-        public bool Login(LoginModel login, out string msgErr, out string token);
+        public bool Login(LoginInputDto login, out string msgErr, out string token);
         public User getUser();
     }
 }

@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using pokedex_back.Domain.Interfaces;
-using pokedex_back.Domain.Models;
 using Dapper;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
 
 namespace pokedex_back.Infrastructure.Repositories
 {
@@ -13,7 +14,7 @@ namespace pokedex_back.Infrastructure.Repositories
         }
 
         #region ' Pokedex '
-        public void SavePokemon(PokemonDTO pokemon)
+        public void SavePokemon(PokemonDTO_old pokemon)
         {
             var insert = "INSERT INTO [POKEMON] (IdPokemon, DsName, Type1, Type2, Image, Generation, isStarter, isPseudo, isLegendary)" +
                "VALUES (@IdPokemon, @DsName, @Type1, @Type2, @Image, @Generation, @isStarter, @isPseudo, @isLegendary)";
@@ -28,13 +29,16 @@ namespace pokedex_back.Infrastructure.Repositories
             }
         }
 
-        public List<Pokemon> GetAll()
+        public List<PokemonDto> GetAll()
         {
-            List<Pokemon> pokemons = new List<Pokemon>();
-            var query = "Select * from [POKEMON]";
+            List<PokemonDto> pokemons = new List<PokemonDto>();
+            var query = $"SELECT * FROM [dbo].[Pokemons]" +
+                $"ORDER BY COALESCE(BaseFormNumber, PokemonNumber), " +
+                $"CASE WHEN BaseFormNumber IS NULL THEN 0 ELSE 1 END, " +
+                $"PokemonNumber;";
             try
             {
-                pokemons = Database.Query<Pokemon>(query).ToList();
+                pokemons = Database.Query<PokemonDto>(query).ToList();
                 
             }
             catch( Exception e)
@@ -88,15 +92,40 @@ namespace pokedex_back.Infrastructure.Repositories
             return pokemon;
 
         }
+
+        public List<PokemonDto> GetAndSaveFromAPI(List<PokemonInputDto> pokemons)
+        {
+            var insert = "INSERT INTO [dbo].[Pokemons] (PokemonNumber, PokemonName, Type1, Type2, Generation, HasPokemonGroup, PokemonGroupId," +
+                "FormGroupId, BaseFormNumber) " +
+               "VALUES ";
+            
+            insert += string.Join(',', pokemons.Select(pokemon => $"({pokemon.PokemonNumber},'{pokemon.PokemonName}',{pokemon.Type1},{(pokemon.Type2 is null ? "NULL" : pokemon.Type2)}," +
+            $"{pokemon.Generation},{(pokemon.HasPokemonGroup ? 1 : 0)}," +$"{(pokemon.PokemonGroupId is null ? "NULL" : pokemon.PokemonGroupId)}," +
+            $"{(pokemon.FormGroupId is null ? "NULL" : pokemon.FormGroupId)},{(pokemon.BaseFormNumber is null ? "NULL" : pokemon.BaseFormNumber)})"));
+            
+            try
+            {
+
+                Database.Execute(insert);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
+
+            List<PokemonDto> pokemonsResponse = GetAll();
+            return pokemonsResponse;
+        }
         #endregion
 
 
         #region ' Shiny Hunt '
         public void SaveShinyHunt(ShinyHunt Hunt)
         {
-            var exists = this.GetShinyHunt(Hunt.IdTrainer, Hunt.PokeName);
+            var exists = GetShinyHunt(Hunt.IdTrainer, Hunt.PokeName);
             if (exists!=null) {
-                this.UpdateShinyHunt(Hunt);
+                UpdateShinyHunt(Hunt);
                 return;
             }
             var insert = "INSERT INTO [ShinyHunt] (IdTrainer, PokeName, Counter)" +

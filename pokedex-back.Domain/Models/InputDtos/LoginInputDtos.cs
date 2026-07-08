@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pokedex_back.Domain.Models
+namespace pokedex_back.Domain.Models.InputDtos
 {
-    public class LoginModel
+    public class LoginInputDto
     {
         public string DsEmail { get; set; }
         public string DsPassword { get; set; }

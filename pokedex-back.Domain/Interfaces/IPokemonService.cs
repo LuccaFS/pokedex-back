@@ -1,4 +1,5 @@
-﻿using pokedex_back.Domain.Models;
+﻿using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace pokedex_back.Domain.Interfaces
 {
     public interface IPokemonService
     {
-        public void SavePokemon(PokemonDTO pokemon);
-        public List<Pokemon> GetAll();
+        public void SavePokemon(PokemonDTO_old pokemon);
+        public List<PokemonDto> GetAll();
         public Pokemon GetByName(string PokeName);
         public Pokemon GetById(string PokeId);
         void SaveShinyHunt(ShinyHunt Hunt);
         List<ShinyHunt> GetUserHunts(int UserId);
+
+        List<PokemonDto> GetAndSaveFromAPI(List<PokemonInputDto> pokemons);
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pokedex_back.Domain.Models
+namespace pokedex_back.Domain.Models.Dtos
 {
-    public class ResponseModel
+    public class ResponseDto
     {
         public string ResponseCode { get; set; }
         public string ResponseMessage { get; set; }
