@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using pokedex_back.Domain.Interfaces;
-using pokedex_back.Domain.Models;
 using Dapper;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
+using pokedex_back.Domain.Aggregates;
+using System.Data;
 
 namespace pokedex_back.Infrastructure.Repositories
 {
@@ -13,10 +15,10 @@ namespace pokedex_back.Infrastructure.Repositories
         }
 
         #region ' Pokedex '
-        public void SavePokemon(PokemonDTO pokemon)
+        public void SavePokemon(PokemonInputDto pokemon)
         {
-            var insert = "INSERT INTO [POKEMON] (IdPokemon, DsName, Type1, Type2, Image, Generation, isStarter, isPseudo, isLegendary)" +
-               "VALUES (@IdPokemon, @DsName, @Type1, @Type2, @Image, @Generation, @isStarter, @isPseudo, @isLegendary)";
+            var insert = "INSERT INTO [dbo].[Pokemons] (PokemonNumber, PokemonName, Type1, Type2, Generation, HasPokemonGroup, PokemonGroupId," +
+                "FormGroupId, BaseFormNumber)";
             try
             {
 
@@ -28,13 +30,16 @@ namespace pokedex_back.Infrastructure.Repositories
             }
         }
 
-        public List<Pokemon> GetAll()
+        public List<PokemonDto> GetAll()
         {
-            List<Pokemon> pokemons = new List<Pokemon>();
-            var query = "Select * from [POKEMON]";
+            List<PokemonDto> pokemons = new List<PokemonDto>();
+            var query = $"SELECT * FROM [dbo].[Pokemons]" +
+                $"ORDER BY COALESCE(BaseFormNumber, PokemonNumber), " +
+                $"CASE WHEN BaseFormNumber IS NULL THEN 0 ELSE 1 END, " +
+                $"PokemonNumber;";
             try
             {
-                pokemons = Database.Query<Pokemon>(query).ToList();
+                pokemons = Database.Query<PokemonDto>(query).ToList();
                 
             }
             catch( Exception e)
@@ -45,14 +50,18 @@ namespace pokedex_back.Infrastructure.Repositories
 
         }
 
-        public Pokemon GetByName(string PokeName)
+        public PokemonDto GetByName(string PokeName)
         {
-            Pokemon pokemon = new Pokemon();
-            var select = new { name = PokeName };
-            var query = "Select * from [POKEMON] WHERE DsName = @name";
+            PokemonDto pokemon = new PokemonDto();
+            DynamicParameters param = new DynamicParameters();
+
+            var query = "Select * from [Pokemons] WHERE [PokemonName] = @name";
+            param.Add("name", value: PokeName, direction: ParameterDirection.Input);
+
+
             try
             {
-                pokemon = Database.QueryFirstOrDefault<Pokemon>(query, select);
+                pokemon = Database.QueryFirstOrDefault<PokemonDto>(query, param);
                 if (pokemon == null)
                 {
                     throw new ApplicationException("Pokemon not found.");
@@ -67,14 +76,17 @@ namespace pokedex_back.Infrastructure.Repositories
 
         }
 
-        public Pokemon GetById(string PokeId)
+        public PokemonDto GetById(string PokeId)
         {
-            Pokemon pokemon = new Pokemon();
-            var select = new { id = PokeId };
-            var query = "Select * from [POKEMON] WHERE IdPokemon = @id";
+            PokemonDto pokemon = new PokemonDto();
+            DynamicParameters param = new DynamicParameters();
+
+            var query = "Select * from [Pokemons] WHERE [PokemonNumber] = @id";
+            param.Add("id", value: PokeId, direction: ParameterDirection.Input);
+
             try
             {
-                pokemon = Database.QueryFirstOrDefault<Pokemon>(query, select);
+                pokemon = Database.QueryFirstOrDefault<PokemonDto>(query, param);
                 if (pokemon == null)
                 {
                     throw new ApplicationException("Pokemon not found.");
@@ -87,52 +99,108 @@ namespace pokedex_back.Infrastructure.Repositories
             }
             return pokemon;
 
+        }
+
+        public List<PokemonDto> GetAndSaveFromAPI(List<PokemonInputDto> pokemons)
+        {
+            var insert = "INSERT INTO [dbo].[Pokemons] (PokemonNumber, PokemonName, Type1, Type2, Generation, HasPokemonGroup, PokemonGroupId," +
+                "FormGroupId, BaseFormNumber) " +
+               "VALUES ";
+            
+            insert += string.Join(',', pokemons.Select(pokemon => $"({pokemon.PokemonNumber},'{pokemon.PokemonName}',{pokemon.Type1},{(pokemon.Type2 is null ? "NULL" : pokemon.Type2)}," +
+            $"{pokemon.Generation},{(pokemon.HasPokemonGroup ? 1 : 0)}," +$"{(pokemon.PokemonGroupId is null ? "NULL" : pokemon.PokemonGroupId)}," +
+            $"{(pokemon.FormGroupId is null ? "NULL" : pokemon.FormGroupId)},{(pokemon.BaseFormNumber is null ? "NULL" : pokemon.BaseFormNumber)})"));
+            
+            try
+            {
+
+                Database.Execute(insert);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
+
+            List<PokemonDto> pokemonsResponse = GetAll();
+            return pokemonsResponse;
         }
         #endregion
 
 
         #region ' Shiny Hunt '
-        public void SaveShinyHunt(ShinyHunt Hunt)
+        public void SaveShinyHunt(ShinyHuntInputDto Hunt)
         {
-            var exists = this.GetShinyHunt(Hunt.IdTrainer, Hunt.PokeName);
+            var exists = GetShinyHunt(new GetShinyHuntInputDto()
+            {
+                TrainerId = Hunt.TrainerId,
+                PokemonNumber = Hunt.PokemonNumber,
+                GameId = Hunt.GameId,
+                MethodId = Hunt.MethodId
+            });
             if (exists!=null) {
-                this.UpdateShinyHunt(Hunt);
+                UpdateShinyHunt(Hunt);
                 return;
             }
-            var insert = "INSERT INTO [ShinyHunt] (IdTrainer, PokeName, Counter)" +
-              "VALUES (@IdTrainer, @PokeName, @Counter)";
+            var insert = "INSERT INTO [ShinyHunts] (TrainerId, PokemonNumber, PokemonName, EncounterCount, PhaseCount, " +
+                        "GameId, HasShinyCharm, MethodId)" +
+                        "VALUES (@TrainerId, @PokemonNumber, @PokemonName, @EncounterCount, @PhaseCount, @GameId, @HasShinyCharm, @MethodId)";
             try
             {
-
                 Database.Execute(insert, Hunt);
             }
             catch (Exception e)
             {
-                throw new ApplicationException(e.Message);
+                throw new ApplicationException("Error saving Shiny Hunt.", e);
             }
         }
 
-        public void UpdateShinyHunt(ShinyHunt Hunt)
+        public void UpdateShinyHunt(ShinyHuntInputDto Hunt)
         {
-            var update = "UPDATE [ShinyHunt] SET Counter = @Counter " +
-              "WHERE IdTrainer = @IdTrainer AND PokeName = @PokeName";
+            DynamicParameters param = new DynamicParameters();
+            var update = "UPDATE [ShinyHunt] SET [EncounterCount] = @EncounterCount,  [PhaseCount] = @PhaseCount, " +
+                         "[GameId] = @GameId, [MethodId] = @MethodId, [HasShinyCharm] = @HasShinyCharm" +
+                         "WHERE [TrainerId] = @TrainerId AND [PokemonNumber] = @PokemonNumber AND [HuntComplete] = 0";
             try
             {
                 Database.Execute(update, Hunt);
             }
             catch (Exception e)
             {
-                throw new ApplicationException(e.Message);
+                throw new ApplicationException("Error Updating Shiny Hunt.",e);
             }
         }
 
-        public ShinyHunt GetShinyHunt(int UserId, string Name)
+        public ShinyHuntDto GetShinyHunt(GetShinyHuntInputDto inputDto)
         {
-            ShinyHunt hunt;
+            ShinyHuntDto hunt;
+            DynamicParameters param = new DynamicParameters();
+            var query = "SELECT * FROM [ShinyHunts] " +
+                        "WHERE [TrainerId] = @id " +
+                        "AND [HuntComplete] = 0";
+            param.Add("id", value: inputDto.TrainerId, direction: ParameterDirection.Input);
+
+            if (inputDto.PokemonNumber is not null)
+            {
+                query += " AND [PokemonNumber] = @pokeNum";
+                param.Add("pokeNum", value: inputDto.PokemonNumber, direction: ParameterDirection.Input);
+            }
+
+            if (inputDto.GameId is not null)
+            {
+                query += " AND [GameId] = @game";
+                param.Add("game", inputDto.GameId);
+            }
+
+            if (inputDto.MethodId is not null)
+            {
+                query += " AND [MethodId] = @method";
+                param.Add("method", inputDto.MethodId, direction: ParameterDirection.Input);
+            }
+
             try
             {
-                var query = "SELECT * FROM [ShinyHunt] WHERE IdTrainer = @id AND PokeName = @name";
-                hunt = Database.QueryFirstOrDefault<ShinyHunt>(query, new { id = UserId, name = Name });
+                hunt = Database.QueryFirstOrDefault<ShinyHuntDto>(query, param);
             }
             catch (Exception e)
             {
@@ -141,17 +209,17 @@ namespace pokedex_back.Infrastructure.Repositories
             return hunt;
         }
 
-        public List<ShinyHunt> GetUserHunts(int UserId)
+        public List<ShinyHuntDto> GetUserHunts(int UserId)
         {
-            List<ShinyHunt> userHunts;
+            List<ShinyHuntDto> userHunts;
             try
             {
-                var query = "SELECT * FROM [ShinyHunt] WHERE IdTrainer = @id";
-                userHunts = Database.Query<ShinyHunt>(query,  new { id = UserId }).ToList();
+                var query = "SELECT * FROM [ShinyHunts] WHERE [TrainerId] = @id";
+                userHunts = Database.Query<ShinyHuntDto>(query,  new { id = UserId }).ToList();
             }
             catch (Exception e)
             {
-                throw new ApplicationException(e.Message);
+                throw new ApplicationException("Error happened when getting user shiny hunts", e);
             }
             return userHunts;
 

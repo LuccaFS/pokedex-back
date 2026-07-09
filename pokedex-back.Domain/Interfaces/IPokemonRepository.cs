@@ -1,17 +1,20 @@
-﻿using pokedex_back.Domain.Models;
+﻿using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
 
 namespace pokedex_back.Domain.Interfaces
 {
     public interface IPokemonRepository
     {
-        void SavePokemon(PokemonDTO pokemon);
-        List<Pokemon> GetAll();
-        Pokemon GetByName(string PokeName);
-        Pokemon GetById(string PokeId);
+        void SavePokemon(PokemonInputDto pokemon);
+        List<PokemonDto> GetAll();
+        PokemonDto GetByName(string PokeName);
+        PokemonDto GetById(string PokeId);
 
-        void SaveShinyHunt(ShinyHunt Hunt);
-        void UpdateShinyHunt(ShinyHunt Hunt);
-        ShinyHunt GetShinyHunt(int UserId, string Name);
-        List<ShinyHunt> GetUserHunts(int UserId);
+        void SaveShinyHunt(ShinyHuntInputDto Hunt);
+        void UpdateShinyHunt(ShinyHuntInputDto Hunt);
+        ShinyHuntDto GetShinyHunt(GetShinyHuntInputDto Hunt);
+        List<ShinyHuntDto> GetUserHunts(int UserId);
+
+        List<PokemonDto> GetAndSaveFromAPI(List<PokemonInputDto> pokemons);
     }
 }

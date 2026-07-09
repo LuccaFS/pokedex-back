@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-            .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            .GetBytes(builder.Configuration.GetSection("Auth:Token").Value)),
         ValidateIssuer = false,
         ValidateAudience = false
     };
@@ -41,6 +41,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPokemonService, PokemonService>();
 builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
+builder.Services.AddScoped<ICommonService, CommonService>();
+builder.Services.AddScoped<ICommonRepository, CommonRepository>();
 
 builder.Services.AddCors(options =>
 {

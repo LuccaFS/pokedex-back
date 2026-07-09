@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using pokedex_back.Domain.Interfaces;
-using pokedex_back.Domain.Models;
+using pokedex_back.Domain.Models.Dtos;
+using pokedex_back.Domain.Models.InputDtos;
 
 namespace pokedex_back.Service.Services
 {
@@ -19,22 +20,22 @@ namespace pokedex_back.Service.Services
         }
 
         #region ' Pokedex '
-        public void SavePokemon(PokemonDTO pokemon)
+        public void SavePokemon(PokemonInputDto pokemon)
         {
             _pokemonRepository.SavePokemon(pokemon);
         }
 
-        public List<Pokemon> GetAll()
+        public List<PokemonDto> GetAll()
         {
             return _pokemonRepository.GetAll();
         }
 
-        public Pokemon GetByName(string PokeName)
+        public PokemonDto GetByName(string PokeName)
         {
             return _pokemonRepository.GetByName(PokeName);
         }
 
-        public Pokemon GetById(string PokeName)
+        public PokemonDto GetById(string PokeName)
         {
             return _pokemonRepository.GetById(PokeName);
         }
@@ -42,17 +43,23 @@ namespace pokedex_back.Service.Services
 
 
         #region ' Shiny Hunt '
-        public void SaveShinyHunt(ShinyHunt Hunt)
+        public void SaveShinyHunt(ShinyHuntInputDto Hunt)
         {
             _pokemonRepository.SaveShinyHunt(Hunt);
         }
 
-        public List<ShinyHunt> GetUserHunts(int UserId)
+        public List<ShinyHuntDto> GetUserHunts(int UserId)
         {
             return _pokemonRepository.GetUserHunts(UserId);
         }
         #endregion
 
+        #region 'PokeAPI'
+        public List<PokemonDto> GetAndSaveFromAPI(List<PokemonInputDto> pokemons)
+        {
+            return _pokemonRepository.GetAndSaveFromAPI(pokemons);
+        }
+        #endregion
 
     }
 }
