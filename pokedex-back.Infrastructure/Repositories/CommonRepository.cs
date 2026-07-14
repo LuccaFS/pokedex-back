@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using pokedex_back.Domain.Aggregates;
 using pokedex_back.Domain.Interfaces;
 using pokedex_back.Domain.Models.Dtos;
 using System;
@@ -169,5 +170,55 @@ namespace pokedex_back.Infrastructure.Repositories
             return response;
         }
 
+        public List<GamesDto> GetGamesDetails(int? gameId)
+        {
+            List<GamesDto> response = new List<GamesDto>();
+            DynamicParameters param = new DynamicParameters();
+
+            var sql = new StringBuilder($"SELECT [GameId], [GameNames], [ReleaseGeneration], [IsRemake], [OriginalGeneration] " +
+                                        $"FROM [dbo].[Games] ");
+
+            if(gameId != null)
+            {
+                sql.Append("WHERE [GameId] = @gameId");
+                param.Add("gameId", value: gameId, direction: ParameterDirection.Input);
+            }
+            try
+            {
+                response = Database.Query<GamesDto>(sql.ToString(), param).ToList();
+
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+            return response;
+
+        }
+
+        public List<ShinyMethodsDto> GetShinyMethodsDetails(int? shinyMethodId)
+        {
+            List<ShinyMethodsDto> response = new List<ShinyMethodsDto>();
+            DynamicParameters param = new DynamicParameters();
+
+            var sql = new StringBuilder($"SELECT [ShinyMethodId], [ShinyMethodName], [ShinyMethodDescription], [ShinyMethodFirstGen], [IsGameExclusive], [GameId] " +
+                                        $"FROM [dbo].[ShinyMethods] ");
+
+            if (shinyMethodId != null)
+            {
+                sql.Append("WHERE [ShinyMethodId] = @shinyMethodId");
+                param.Add("shinyMethodId", value: shinyMethodId, direction: ParameterDirection.Input);
+            }
+            try
+            {
+                response = Database.Query<ShinyMethodsDto>(sql.ToString(), param).ToList();
+
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+            return response;
+        }
     }
 }

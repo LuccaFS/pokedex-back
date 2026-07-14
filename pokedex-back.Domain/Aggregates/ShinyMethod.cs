@@ -11,7 +11,7 @@ namespace pokedex_back.Domain.Aggregates
         public int ShinyMethodId { get; set; }
         public string ShinyMethodName { get; set; } = null!;
         public string? ShinyMethodDescription { get; set; }
-        public int ShinyMethodFirstGame { get; set; }
+        public int ShinyMethodFirstGen { get; set; }
         public bool IsGameExclusive { get; set; }
         public int? GameId { get; set; }
 

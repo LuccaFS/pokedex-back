@@ -19,6 +19,7 @@ namespace pokedex_back.Controllers
 
         #region Methods
 
+        #region Dropdowns
         [HttpGet("Dropdown/Ranks")]
         public async Task<ActionResult<List<DropdownDto>>> GetRanksDropdown([FromQuery] string? name)
         {
@@ -54,6 +55,22 @@ namespace pokedex_back.Controllers
         {
             return Ok(_commonService.GetShinyMethodsDropdown(name));
         }
+        #endregion
+
+        #region Details
+        [HttpGet("Detail/Games")]
+        public async Task<ActionResult<List<GamesDto>>> GetGamesDetails([FromQuery] int? gameId)
+        {
+            return Ok(_commonService.GetGamesDetails(gameId));
+        }
+
+
+        [HttpGet("Detail/ShinyMethods")]
+        public async Task<ActionResult<List<ShinyMethodsDto>>> GetShinyMethodsDetails([FromQuery] int? shinyMethodId)
+        {
+            return Ok(_commonService.GetShinyMethodsDetails(shinyMethodId));
+        }
+        #endregion
         #endregion
     }
 }

@@ -46,5 +46,15 @@ namespace pokedex_back.Service.Services
         {
             return _commonRepository.GetShinyMethodsDropdown(name);
         }
+
+        public List<GamesDto> GetGamesDetails(int? gameId)
+        {
+            return _commonRepository.GetGamesDetails(gameId);
+        }
+
+        public List<ShinyMethodsDto> GetShinyMethodsDetails(int? shinyMethodId)
+        {
+            return _commonRepository.GetShinyMethodsDetails(shinyMethodId);
+        }
     }
 }

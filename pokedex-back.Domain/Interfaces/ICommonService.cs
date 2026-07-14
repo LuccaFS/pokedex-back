@@ -15,5 +15,8 @@ namespace pokedex_back.Domain.Interfaces
         List<DropdownDto> GetFormGroupsDropdown(string? name = null);
         List<DropdownDto> GetGamesDropdown(string? name = null);
         List<DropdownDto> GetShinyMethodsDropdown(string? name = null);
+
+        List<GamesDto> GetGamesDetails(int? gameId);
+        List<ShinyMethodsDto> GetShinyMethodsDetails(int? shinyMethodId);
     }
 }

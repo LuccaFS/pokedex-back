@@ -150,7 +150,7 @@ namespace pokedex_back.Infrastructure
             {
                 entity.Property(e => e.ShinyMethodDescription).HasMaxLength(255);
 
-                entity.Property(e => e.ShinyMethodFirstGame).HasDefaultValueSql("((2))");
+                entity.Property(e => e.ShinyMethodFirstGen).HasDefaultValueSql("((2))");
 
                 entity.Property(e => e.ShinyMethodName).HasMaxLength(50);
             });
